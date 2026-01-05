@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《管理学》期末考试模拟试题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #7f8c8d;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+        }
+        
+        .exam-info {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            color: #555;
+            border-left: 4px solid #3498db;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 22px;
+            background-color: #3498db;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .question {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 3px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .question:hover {
+            border-left-color: #3498db;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .options {
+            margin-left: 35px;
+            margin-bottom: 15px;
+        }
+        
+        .option {
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+        
+        .answer-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .answer-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .answer {
+            background-color: #e8f6f3;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 3px solid #2ecc71;
+            display: none;
+        }
+        
+        .answer.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .answer-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 8px;
+        }
+        
+        .case-study {
+            background-color: #e8f4fd;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .case-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .case-content {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .score-distribution {
+            background-color: #fef9e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px dashed #f1c40f;
+        }
+        
+        .score-title {
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .score-title i {
+            margin-right: 8px;
+            color: #f39c12;
+        }
+        
+        .score-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .score-item {
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-width: 150px;
+        }
+        
+        .score-item span {
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .exam-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .score-list {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>《管理学》期末考试模拟试题</h1>
+            <h2>2025-2026学年第一学期</h2>
+        </div>
+        
+        <div class="exam-info">
+            <div><strong>考试形式：</strong>闭卷、笔试</div>
+            <div><strong>试卷满分：</strong>100分</div>
+            <div><strong>考试时间：</strong>120分钟</div>
+        </div>
+        
+        <!-- 单项选择题 -->
+        <div class="section">
+            <div class="section-title">一、单项选择题（共5题，每题4分，共20分）</div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    管理学的研究对象是：
+                </div>
+                <div class="options">
+                    <div class="option">A. 只研究企业组织的管理活动</div>
+                    <div class="option">B. 只研究个体活动的管理</div>
+                    <div class="option">C. 既包括对个体活动的管理，也包括对群体活动的管理，现代管理学把企业组织作为主要研究对象</div>
+                    <div class="option">D. 只研究政府组织的管理活动</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(1)">显示答案</button>
+                <div class="answer" id="answer1">
+                    <div class="answer-title">正确答案：C</div>
+                    <div>解析：根据大纲中绪论部分的内容，管理学的研究对象既包括对个体活动的管理，也包括对群体活动的管理，现代管理学把企业组织作为管理学的研究对象。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    泰勒被称为：
+                </div>
+                <div class="options">
+                    <div class="option">A. 组织管理之父</div>
+                    <div class="option">B. 科学管理之父</div>
+                    <div class="option">C. 管理过程之父</div>
+                    <div class="option">D. 官僚组织理论之父</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(2)">显示答案</button>
+                <div class="answer" id="answer2">
+                    <div class="answer-title">正确答案：B</div>
+                    <div>解析：根据大纲中管理理论的历史演变部分，泰勒被称为"科学管理之父"。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    根据双因素理论，下列哪项属于保健因素？
+                </div>
+                <div class="options">
+                    <div class="option">A. 工作成就感</div>
+                    <div class="option">B. 工作责任感</div>
+                    <div class="option">C. 工作带来的愉悦感</div>
+                    <div class="option">D. 工资水平</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(3)">显示答案</button>
+                <div class="answer" id="answer3">
+                    <div class="answer-title">正确答案：D</div>
+                    <div>解析：根据大纲中激励部分的双因素理论，保健因素是指工作环境或外界因素，如企业政策、工资水平、工作环境、人际关系和安全等；而激励因素是指工作本身或工作内容方面的因素，如工作成就感、工作责任感、工作带来的愉悦感等。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    在控制过程中，在工作结束或行为发生之后进行的控制称为：
+                </div>
+                <div class="options">
+                    <div class="option">A. 前馈控制</div>
+                    <div class="option">B. 现场控制</div>
+                    <div class="option">C. 反馈控制</div>
+                    <div class="option">D. 同期控制</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(4)">显示答案</button>
+                <div class="answer" id="answer4">
+                    <div class="answer-title">正确答案：C</div>
+                    <div>解析：根据大纲中控制部分的内容，反馈控制又称为事后控制，是指在工作结束或行为发生之后进行的控制。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">5</span>
+                    根据公平理论，员工对报酬的满意度取决于：
+                </div>
+                <div class="options">
+                    <div class="option">A. 只取决于绝对报酬</div>
+                    <div class="option">B. 只取决于相对报酬</div>
+                    <div class="option">C. 不仅取决于绝对报酬，更取决于相对报酬</div>
+                    <div class="option">D. 取决于领导对自己的评价</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(5)">显示答案</button>
+                <div class="answer" id="answer5">
+                    <div class="answer-title">正确答案：C</div>
+                    <div>解析：根据大纲中激励部分的公平理论，员工对报酬的满意度不仅取决于绝对报酬，更取决于相对报酬；相对报酬的比较包括横向比较和纵向比较。</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 多项选择题 -->
+        <div class="section">
+            <div class="section-title">二、多项选择题（共3题，每题4分，共12分）</div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    管理的基本原理包括：
+                </div>
+                <div class="options">
+                    <div class="option">A. 人本原理</div>
+                    <div class="option">B. 系统原理</div>
+                    <div class="option">C. 效益原理</div>
+                    <div class="option">D. 适度原理</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(6)">显示答案</button>
+                <div class="answer" id="answer6">
+                    <div class="answer-title">正确答案：A、B、C、D</div>
+                    <div>解析：根据大纲中管理导论部分，管理的基本原理包括人本原理、系统原理、效益原理和适度原理。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    法约尔提出的管理职能包括：
+                </div>
+                <div class="options">
+                    <div class="option">A. 计划</div>
+                    <div class="option">B. 组织</div>
+                    <div class="option">C. 指挥</div>
+                    <div class="option">D. 协调</div>
+                    <div class="option">E. 控制</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(7)">显示答案</button>
+                <div class="answer" id="answer7">
+                    <div class="answer-title">正确答案：A、B、C、D、E</div>
+                    <div>解析：根据大纲中管理理论的历史演变部分，法约尔是管理学理论的奠基人，他提出管理职能包括计划、组织、指挥、协调和控制。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    根据马斯洛的需要层次理论，下列哪些属于高层次需要？
+                </div>
+                <div class="options">
+                    <div class="option">A. 生理需要</div>
+                    <div class="option">B. 安全需要</div>
+                    <div class="option">C. 社交需要</div>
+                    <div class="option">D. 尊重需要</div>
+                    <div class="option">E. 自我实现需要</div>
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(8)">显示答案</button>
+                <div class="answer" id="answer8">
+                    <div class="answer-title">正确答案：D、E</div>
+                    <div>解析：根据大纲中激励部分的需要层次理论，生理需要、安全需要和社交需要属于低层次需要；尊重需要和自我实现需要属于高层次需要。</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 判断题 -->
+        <div class="section">
+            <div class="section-title">三、判断题（共3题，每题2分，共6分）</div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    韦伯被称为"科学管理之父"。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(9)">显示答案</button>
+                <div class="answer" id="answer9">
+                    <div class="answer-title">正确答案：错误</div>
+                    <div>解析：韦伯被称为"官僚（科层）组织理论之父"或"科层管理之父"，而泰勒被称为"科学管理之父"。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    根据决策的环境可控程度，决策可分为确定型决策、风险型决策和不确定型决策。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(10)">显示答案</button>
+                <div class="answer" id="answer10">
+                    <div class="answer-title">正确答案：正确</div>
+                    <div>解析：根据大纲中决策部分的内容，根据环境可控程度，决策可分为确定型决策、风险型决策和不确定型决策。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    有机式组织的特点是信息集中于高层，垂直的命令与信息传递。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(11)">显示答案</button>
+                <div class="answer" id="answer11">
+                    <div class="answer-title">正确答案：错误</div>
+                    <div>解析：有机式组织的特点是信息的分散与共享，水平的沟通与信息传递。信息集中于高层，垂直的命令与信息传递是机械式组织的特点。</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 名词解释 -->
+        <div class="section">
+            <div class="section-title">四、名词解释（共4题，每题4分，共16分）</div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    管理
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(12)">显示答案</button>
+                <div class="answer" id="answer12">
+                    <div class="answer-title">参考答案</div>
+                    <div>管理就是为了有效实施组织目标，由管理者利用专门知识、技术和方法对组织活动进行决策、组织、领导、控制并不断创新的过程。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    决策
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(13)">显示答案</button>
+                <div class="answer" id="answer13">
+                    <div class="answer-title">参考答案</div>
+                    <div>决策是指为实现一定的目标，在多个备选方案中选择一个方案的分析判断过程。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    组织文化
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(14)">显示答案</button>
+                <div class="answer" id="answer14">
+                    <div class="answer-title">参考答案</div>
+                    <div>组织文化指的是一个在长期实践活动中形成的具有本组织特征的文化现象，是组织中全体成员共同接受和共同遵循的价值观念、思维方式、心理预期、行为准则、团队归属感以及工作作风等群体意识的总称。</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">4</span>
+                    激励
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(15)">显示答案</button>
+                <div class="answer" id="answer15">
+                    <div class="answer-title">参考答案</div>
+                    <div>激励是组织诱发个体产生满足某种需求的动机进而促使个体行为与组织目标趋同的管理过程。</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 简答题 -->
+        <div class="section">
+            <div class="section-title">五、简答题（共3题，每题8分，共24分）</div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">1</span>
+                    简述泰勒科学管理理论的主要内容。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(16)">显示答案</button>
+                <div class="answer" id="answer16">
+                    <div class="answer-title">参考答案</div>
+                    <div>泰勒的科学管理理论主要包括以下内容：<br>
+                    1. 改进工作方法，并根据工作的要求挑选和培训工人。<br>
+                    2. 改进分配方法，并实行差别计件工资制。<br>
+                    3. 改进生产组织，加强企业管理。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">2</span>
+                    简述领导与管理的区别。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(17)">显示答案</button>
+                <div class="answer" id="answer17">
+                    <div class="answer-title">参考答案</div>
+                    <div>领导与管理的区别主要体现在：<br>
+                    1. 从本质上说，管理是建立在合法的、有报酬的和强制性权力的基础上对下属命令的行为。而领导更多地是建立在个人影响权、专长权以及模范作用的基础上。<br>
+                    2. 一个人可能既是管理者，也是领导者，但是，管理者和领导者两者分离的情况也是有的。一个人可能是领导者但并不一定是管理者。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">
+                    <span class="question-number">3</span>
+                    简述有效沟通的标准。
+                </div>
+                <button class="answer-btn" onclick="toggleAnswer(18)">显示答案</button>
+                <div class="answer" id="answer18">
+                    <div class="answer-title">参考答案</div>
+                    <div>有效沟通的标准包括：<br>
+                    1. 足够的信息量；<br>
+                    2. 信息被准确的表述和理解；<br>
+                    3. 信息的及时性。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 案例分析题 -->
+        <div class="section">
+            <div class="section-title">六、案例分析题（共1题，22分）</div>
+            
+            <div class="case-study">
+                <div class="case-title">案例背景：</div>
+                <div class="case-content">
+                    A公司是一家成立五年的科技企业，近年来业务快速发展，员工从最初的20人增加到200人。但最近公司管理层发现了一些问题：<br><br>
+                    1. 员工工作积极性下降，抱怨工作压力大，薪酬不公平；<br>
+                    2. 部门之间沟通不畅，信息传递效率低，经常出现工作重复或遗漏；<br>
+                    3. 中层管理人员反映决策过程缓慢，需要层层上报，错失市场机会；<br>
+                    4. 公司文化逐渐淡化，新老员工之间出现隔阂。<br><br>
+                    公司总经理决定召开管理层会议，讨论如何解决这些问题。
+                </div>
+                
+                <div class="question">
+                    <div class="question-title">
+                        <span class="question-number">1</span>
+                        请结合激励理论，分析A公司员工工作积极性下降的可能原因，并提出解决建议。（8分）
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer(19)">显示答案</button>
+                    <div class="answer" id="answer19">
+                        <div class="answer-title">参考答案</div>
+                        <div>可能原因分析：<br>
+                        1. 根据公平理论，员工抱怨薪酬不公平，可能是横向比较（与其他同事比较）或纵向比较（与自己过去比较）产生了不公平感；<br>
+                        2. 根据双因素理论，工作压力大可能涉及保健因素（如工作环境、人际关系）或激励因素（如工作成就感、发展前景）方面的问题；<br>
+                        3. 根据期望理论，员工可能认为努力与绩效、绩效与奖励、奖励与个人目标之间的关系不明确或不合理。<br><br>
+                        解决建议：<br>
+                        1. 建立公平的薪酬体系，进行薪酬调查和岗位评估；<br>
+                        2. 实施工作丰富化和扩大化，增加工作挑战性和成就感；<br>
+                        3. 加强绩效管理与奖励制度的关联性，提高激励效果。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-title">
+                        <span class="question-number">2</span>
+                        针对A公司沟通不畅的问题，请分析可能的原因，并提出改善沟通的措施。（7分）
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer(20)">显示答案</button>
+                    <div class="answer" id="answer20">
+                        <div class="answer-title">参考答案</div>
+                        <div>可能原因：<br>
+                        1. 组织障碍：随着公司规模扩大，组织结构可能变得复杂，信息传递链条变长；<br>
+                        2. 沟通渠道不足：可能缺乏有效的正式沟通渠道，如定期部门会议、信息共享平台等；<br>
+                        3. 人际障碍：员工个性、认知差异可能导致沟通误解。<br><br>
+                        改善措施：<br>
+                        1. 建立正式的沟通渠道，如定期跨部门会议、内部通讯等；<br>
+                        2. 利用现代信息技术建立信息共享平台；<br>
+                        3. 加强员工沟通技巧培训；<br>
+                        4. 鼓励非正式沟通，促进信息流动。
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-title">
+                        <span class="question-number">3</span>
+                        请结合组织理论，为A公司提出改善组织结构和管理方式的建议。（7分）
+                    </div>
+                    <button class="answer-btn" onclick="toggleAnswer(21)">显示答案</button>
+                    <div class="answer" id="answer21">
+                        <div class="answer-title">参考答案</div>
+                        <div>改善建议：<br>
+                        1. 适当授权：根据授权原则，将部分决策权下放给中层管理者，提高决策效率；<br>
+                        2. 调整组织结构：考虑从机械式组织向有机式组织转变，增加灵活性，如设立跨部门项目团队；<br>
+                        3. 加强组织文化建设：通过活动、培训等方式强化公司核心价值观，增强员工归属感；<br>
+                        4. 优化管理层次：评估现有管理层级是否合理，考虑扁平化结构以提高信息传递效率。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="score-distribution">
+            <div class="score-title">
+                <span style="margin-right:8px;">📊</span> 试卷题型结构与分值分布
+            </div>
+            <div class="score-list">
+                <div class="score-item">单项选择题：<span>20分</span></div>
+                <div class="score-item">多项选择题：<span>12分</span></div>
+                <div class="score-item">判断题：<span>6分</span></div>
+                <div class="score-item">名词解释：<span>16分</span></div>
+                <div class="score-item">简答题：<span>24分</span></div>
+                <div class="score-item">案例分析题：<span>22分</span></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>《管理学》期末考试复习大纲（2025-2026-1）</p>
+            <p>注：本模拟试题根据考试大纲重点内容编制，仅供参考复习使用</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById('answer' + id);
+            answer.classList.toggle('show');
+            
+            // 更新按钮文本
+            const button = event.target;
+            if (answer.classList.contains('show')) {
+                button.textContent = '隐藏答案';
+                button.style.backgroundColor = '#e74c3c';
+            } else {
+                button.textContent = '显示答案';
+                button.style.backgroundColor = '#2ecc71';
+            }
+        }
+        
+        // 初始隐藏所有答案
+        document.addEventListener('DOMContentLoaded', function() {
+            const answers = document.querySelectorAll('.answer');
+            answers.forEach(answer => {
+                answer.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
